@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shravani Ghag | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-primary: #0a192f;
+            --bg-secondary: #112240;
+            --bg-tertiary: #233554;
+            --text-primary: #e6f1ff;
+            --text-secondary: #8892b0;
+            --accent: #64ffda;
+            --accent-glow: rgba(100, 255, 218, 0.1);
+            --border-color: #233554;
+            --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f4f6f9;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent: #0ea5e9;
+            --accent-glow: rgba(14, 165, 233, 0.1);
+            --border-color: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            transition: var(--transition);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(10, 25, 47, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: var(--transition);
+            border-bottom: 1px solid transparent;
+        }
+
+        [data-theme="light"] header {
+            background-color: rgba(244, 246, 249, 0.85);
+        }
+
+        header.scrolled {
+            border-bottom: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-family: 'JetBrains Mono', monospace;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--accent-glow);
+        }
+
+        /* Container Setup */
+        section {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 100px 40px;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            position: relative;
+            margin: 10px 0 40px 0;
+            width: 100%;
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            position: relative;
+            width: 200px;
+            height: 1px;
+            margin-left: 20px;
+            background-color: var(--border-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 150px;
+        }
+
+        .hero-mono {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            line-height: 1.1;
+        }
+
+        .hero-subtitle {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--text-secondary);
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+
+        .hero-desc {
+            max-width: 600px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 50px;
+        }
+
+        .cta-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            font-family: 'JetBrains Mono', monospace;
+            padding: 18px 28px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            background: transparent;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background-color: var(--accent);
+            color: var(--bg-primary);
+            border: 1px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            opacity: 0.9;
+        }
+
+        /* About & Education */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 50px;
+        }
+
+        .education-timeline {
+            position: relative;
+            border-left: 2px solid var(--border-color);
+            padding-left: 20px;
+            margin-top: 20px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item::before {
+            content: "";
+            position: absolute;
+            left: -27px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--accent);
+        }
+
+        .timeline-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .timeline-sub {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .badge-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .badge {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .skills-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .skills-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .skills-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .skills-card h3 i {
+            color: var(--accent);
+        }
+
+        .skill-list {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            font-family: 'JetBrains Mono', monospace;
+            background-color: var(--bg-tertiary);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        /* Projects */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .folder-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .project-date {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 15px;
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .project-details {
+            list-style: none;
+            margin-bottom: 20px;
+            padding-left: 0;
+        }
+
+        .project-details li {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .project-details li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .project-tech {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: auto;
+        }
+
+        .tech-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent);
+            background-color: var(--accent-glow);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        /* Certifications & Awards */
+        .cert-awards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .cert-list, .award-list {
+            list-style: none;
+        }
+
+        .cert-item, .award-item {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 25px;
+        }
+
+        .cert-item::before {
+            content: "\f0a9";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--accent);
+        }
+
+        .award-item::before {
+            content: "\f091";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--accent);
+        }
+
+        .cert-title, .award-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 1.05rem;
+        }
+
+        .cert-meta, .award-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace;
+            margin-top: 4px;
+        }
+
+        /* Contact */
+        .contact-container {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 40px 0;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .contact-link {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-secondary);
+                flex-direction: column;
+                padding: 40px;
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero-title { font-size: 2.8rem; }
+            .hero-subtitle { font-size: 2.2rem; }
+            .about-grid, .cert-awards-grid { grid-template-columns: 1fr; }
+            section { padding: 80px 20px; }
+        }
+.certifications-container{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:20px;
+}
+
+.cert-card{
+    width:350px;
+    text-align:center;
+}
+
+.cert-card img{
+    width:100%;
+    height:auto;
+}
+    </style>
+</head>
+<body>
+
+    <header id="navbar">
+        <nav class="nav-container">
+            <a href="#" class="logo">SG</a>
+            <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <p class="hero-mono">Hi, my name is</p>
+            <h1 class="hero-title">SHRAVANI GHAG.</h1>
+            <h2 class="hero-subtitle">Student Developer</h2>
+            <p class="hero-desc">
+                Passionate student developer with interests in software engineering, web development, financial markets, and data analysis. Experienced in building practical projects using HTML, CSS, JavaScript, and Excel. Continuously learning new technologies and seeking opportunities to apply technical and analytical skills in real-world environments.
+            </p>
+            <div class="cta-container">
+                <a href="#projects" class="btn btn-secondary">View Projects</a>
+                <a href="https://www.linkedin.com/in/shravani-ghag-b369a62b4" target="_blank" class="btn btn-primary"><i class="fab fa-linkedin"></i> Connect on LinkedIn</a>
+            </div>
+        </section>
+
+        <section id="about">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-grid">
+                <div>
+                    <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                        Passionate student developer with structural knowledge in software building, front-end ecosystems, and data processing architectures.
+                    </p>
+                    <h4 style="margin-bottom: 10px;">Languages</h4>
+                    <div class="badge-group">
+                        <span class="badge">English</span>
+                        <span class="badge">Marathi</span>
+                        <span class="badge">Hindi</span>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 15px;"><i class="fas fa-graduation-cap" style="color: var(--accent);"></i> Education</h3>
+                    <div class="education-timeline">
+                        <div class="timeline-item">
+                            <span class="timeline-date">Jul 2025 - Jul 2028</span>
+                            <h4 class="timeline-title">Diploma in Computer Engineering</h4>
+                            <p class="timeline-sub">Vidyalankar Polytechnic</p>
+                        </div>
+                        <div class="timeline-item">
+                            <span class="timeline-date">2014 - 2025</span>
+                            <h4 class="timeline-title">SSC (Secondary School Certificate)</h4>
+                            <p class="timeline-sub">St. Columba Girls High School<br><strong>Grade: 86%</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Skills</h2>
+            <div class="skills-grid">
+                <div class="skills-card">
+                    <h3><i class="fas fa-code"></i> Engineering & Web</h3>
+                    <ul class="skill-list">
+                        <li class="skill-tag">HTML</li>
+                        <li class="skill-tag">CSS</li>
+                        <li class="skill-tag">JavaScript</li>
+                        <li class="skill-tag">C Programming</li>
+                        <li class="skill-tag">Web Development</li>
+                    </ul>
+
+                </div>
+                <div class="skills-card">
+                    <h3><i class="fas fa-chart-bar"></i> Analytics & Optimization</h3>
+                    <ul class="skill-list">
+                        <li class="skill-tag">Microsoft Excel</li>
+                        <li class="skill-tag">Data Analysis</li>
+                        <li class="skill-tag">Search Engine Optimization</li>
+                    </ul>
+                </div>
+                <div class="skills-card">
+                    <h3><i class="fas fa-brain"></i> Core Competencies</h3>
+                    <ul class="skill-list">
+                        <li class="skill-tag">Problem Solving</li>
+                        <li class="skill-tag">Research & Documentation</li>
+                        <li class="skill-tag">Communication</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="far fa-folder folder-icon"></i>
+                        <span class="project-date">Apr 2026 - Present</span>
+                    </div>
+                    <div>
+<img src="ex.png" height="150" width="200">
+                        <h3 class="project-title">EXPENSETRACKER PRO ELITE | PERSONAL FINANCE MANAGEMENT WEB APPLICATION</h3>
+                        <ul class="project-details">
+                            <li>DEVELOPED A RESPONSIVE FINANCE MANAGEMENT APPLICATION FOR TRACKING INCOME, EXPENSES, SAVINGS, AND FINANCIAL GOALS.</li>
+                            <li>IMPLEMENTED INTERACTIVE ANALYTICS DASHBOARDS, TRANSACTION MANAGEMENT, AND PDF REPORT GENERATION.</li>
+                            <li>DESIGNED A MODERN FINTECH-INSPIRED USER INTERFACE WITH DARK/LIGHT MODE SUPPORT. UTILIZED LOCALSTORAGE TO ENSURE SECURE AND PERSISTENT CLIENT-SIDE DATA STORAGE.</li>
+                        </ul>
+                    </div>
+                    <ul class="project-tech">
+                        <li class="tech-tag">HTML5</li>
+                        <li class="tech-tag">CSS3</li>
+                        <li class="tech-tag">JAVASCRIPT</li>
+                        <li class="tech-tag">CHART.JS</li>
+                        <li class="tech-tag">LOCALSTORAGE</li>
+                        <li class="tech-tag">HTML2PDF.JS</li>
+                    </ul><br>
+<a href="https://shravanighag055-dev.github.io/money_tracker"><img src="web.png" height="30" width="150"></a>
+
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="far fa-folder folder-icon"></i>
+                        <span class="project-date">May 2026 - Present</span>
+                    </div>
+                    <div><br>
+<img src="re.png" height="150" width="200">
+                        <h3 class="project-title">RESUMEFORGE AI | AI-POWERED RESUME BUILDER</h3>
+                        <ul class="project-details">
+                            <li>BUILT AN ATS-FRIENDLY RESUME BUILDER WITH REAL-TIME PREVIEW AND CUSTOMIZABLE TEMPLATES.</li>
+                            <li>INTEGRATED AI-ASSISTED SUMMARY GENERATION AND PDF EXPORT FUNCTIONALITY.</li>
+                            <li>DESIGNED A RESPONSIVE MULTI-STEP WORKFLOW TO SIMPLIFY RESUME CREATION.</li>
+                        </ul>
+                    </div>
+                    <ul class="project-tech">
+                        <li class="tech-tag">HTML5</li>
+                        <li class="tech-tag">CSS3</li>
+                        <li class="tech-tag">JAVASCRIPT</li>
+                    </ul><br>
+<a href="https://shravanighag055-dev.github.io/resumemaker"><img src="web.png" height="30" width="150"></a>
+
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="far fa-folder folder-icon"></i>
+                        <span class="project-date">Mar 2026 - Present</span>
+                    </div>
+                    <div>
+<img src="lib.png" height="150" width="200">
+                        <h3 class="project-title">LIBRARY MANAGEMENT SYSTEM</h3>
+                        <ul class="project-details">
+                            <li>DEVELOPED A MENU-DRIVEN SYSTEM FOR MANAGING BOOKS, STUDENT RECORDS, AND LIBRARY TRANSACTIONS.</li>
+                            <li>IMPLEMENTED SEARCH, ISSUE, RETURN, UPDATE, AND RECORD MANAGEMENT FUNCTIONALITIES.</li>
+                            <li>APPLIED FILE HANDLING CONCEPTS FOR EFFICIENT DATA STORAGE AND RETRIEVAL.</li>
+                        </ul>
+                    </div>
+                    <ul class="project-tech">
+                        <li class="tech-tag">C PROGRAMMING</li>
+                        <li class="tech-tag">FILE HANDLING</li>
+                    </ul>
+
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="far fa-folder folder-icon"></i>
+                        <span class="project-date">Feb 2026 - Mar 2026</span>
+                    </div>
+                    <div>
+<img src="bj.png" height="150" width="200">
+                        <h3 class="project-title">ON/OFF LED USING BJT TRANSISTOR</h3>
+                        <ul class="project-details">
+                            <li>DESIGNED AND IMPLEMENTED A TRANSISTOR-BASED SWITCHING CIRCUIT USING A BC547 NPN TRANSISTOR.</li>
+                            <li>BUILT AND TESTED THE CIRCUIT ON BREADBOARD AND PCB PLATFORMS.</li>
+                            <li>STRENGTHENED PRACTICAL KNOWLEDGE OF ELECTRONIC SWITCHING AND HARDWARE IMPLEMENTATION.</li>
+                        </ul>
+                    </div>
+                    <ul class="project-tech">
+                        <li class="tech-tag">ELECTRONICS</li>
+                        <li class="tech-tag">PCB DESIGN</li>
+                        <li class="tech-tag">CIRCUIT ASSEMBLY</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="far fa-folder folder-icon"></i>
+                        <span class="project-date">Oct 2025 - Dec 2025</span>
+                    </div>
+                    <div>
+<img src="ps.png" height="150" width="200">
+                        <h3 class="project-title">PARALLEL AND SERIES CONNECTION ANALYSIS</h3>
+                        <ul class="project-details">
+                            <li>CONDUCTED EXPERIMENTAL ANALYSIS OF SERIES AND PARALLEL ELECTRICAL CIRCUITS.</li>
+                            <li>EVALUATED VOLTAGE DISTRIBUTION, CURRENT FLOW, EQUIVALENT RESISTANCE, AND POWER CONSUMPTION.</li>
+                            <li>VERIFIED THEORETICAL CALCULATIONS THROUGH PRACTICAL IMPLEMENTATION.</li>
+                        </ul>
+                    </div>
+                    <ul class="project-tech">
+                        <li class="tech-tag">CIRCUIT ANALYSIS</li>
+                        <li class="tech-tag">ELECTRICAL ENGINEERING</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="far fa-folder folder-icon"></i>
+                        <span class="project-date">Sep 2025 - Oct 2025</span>
+                    </div>
+                    <div>
+<img src="cr.png" height="150" width="200">
+                        <h3 class="project-title">HILL CIPHER CRYPTOGRAPHY PROJECT</h3>
+                        <ul class="project-details">
+                            <li>IMPLEMENTED THE HILL CIPHER ENCRYPTION AND DECRYPTION ALGORITHM USING MATRIX OPERATIONS.</li>
+                            <li>APPLIED MODULAR ARITHMETIC CONCEPTS TO SECURE COMMUNICATION SYSTEMS.</li>
+                            <li>ENHANCED UNDERSTANDING OF CRYPTOGRAPHY AND ALGORITHM DESIGN.</li>
+                        </ul>
+                    </div>
+                    <ul class="project-tech">
+                        <li class="tech-tag">CRYPTOGRAPHY</li>
+                        <li class="tech-tag">MATRIX OPERATIONS</li>
+                        <li class="tech-tag">C PROGRAMMING</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="far fa-folder folder-icon"></i>
+                        <span class="project-date">Mar 2025</span>
+                    </div>
+                    <div>
+<img src="mu.png" height="150" width="200">
+                        <h3 class="project-title">MUSIC WEB PAGE</h3>
+                        <ul class="project-details">
+                            <li>DESIGNED AND DEVELOPED A RESPONSIVE MUSIC-THEMED WEBSITE.</li>
+                            <li>APPLIED MODERN WEB DESIGN PRINCIPLES AND RESPONSIVE LAYOUTS.</li>
+                            <li>IMPROVED FRONT-END DEVELOPMENT AND UI DESIGN SKILLS.</li>
+                        </ul>
+                    </div>
+                    <ul class="project-tech">
+                        <li class="tech-tag">HTML5</li>
+                        <li class="tech-tag">CSS3</li>
+                    </ul>
+                </div>
+                <div class="project-card">
+                    <div class="project-header">
+                        <i class="far fa-folder folder-icon"></i>
+                        <span class="project-date">Feb 2025</span>
+                    </div>
+                    <div>
+<img src="li.png" height="150" width="200">
+                        <h3 class="project-title">GUESS THE NUMBER GAME</h3>
+                        <ul class="project-details">
+                            <li>DEVELOPED A COMMAND-LINE NUMBER GUESSING GAME IN A LINUX ENVIRONMENT.</li>
+                            <li>IMPLEMENTED USER INTERACTION, RANDOM NUMBER GENERATION, AND LOGICAL DECISION-MAKING.</li>
+                            <li>STRENGTHENED PROGRAMMING AND PROBLEM-SOLVING SKILLS.</li>
+                        </ul>
+                    </div>
+                    <ul class="project-tech">
+                        <li class="tech-tag">LINUX</li>
+                        <li class="tech-tag">PROGRAMMING FUNDAMENTALS</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications">
+            <div class="cert-awards-grid">
+                <div>
+<h2 class="section-title">Certifications</h2>
+
+<div class="certifications-container">
+
+    <div style="display:inline-block; width:10 vertical-align:top;">
+        <h2>Fundamentals of Business Process Management - Simplilearn SkillUp</h2>
+        <p>(2026)</p>
+        <img src="bpm.png" height="550" width="750">
+    </div>
+
+    <div style="display:inline-block; width:10; vertical-align:top;">
+        <h2>Data Science Exam Certificate - StudyGyaan</h2>
+        <p>(2026)</p>
+        <img src="mcq.png" height="550" width="750">
+    </div>
+
+    <div style="display:inline-block; width:10; vertical-align:top;">
+        <h2>Content-Led SEO with Brian Dean</h2>
+        <p>Semrush Academy</p>
+        <img src="CL-SEO.png" height="550" width="750">
+    </div>
+
+    <div style="display:inline-block; width:10; vertical-align:top;">
+        <h2>How to Optimize for Mobile: The CRAFT of Mobile SEO</h2>
+        <p>Semrush Academy</p>
+        <img src="Craft.png" height="550" width="750">
+    </div>
+
+    <div style="display:inline-block; width:10; vertical-align:top;">
+        <h2>On-Page SEO and AI Search Essentials</h2>
+        <p>Semrush Academy</p>
+        <img src="on-page.png" height="550" width="750">
+    </div>
+
+    <div style="display:inline-block; width:10; vertical-align:top;">
+        <h2>Become an AI-Powered Marketer</h2>
+        <p>Semrush Academy</p>
+        <img src="ai.png" height="550" width="750">
+    </div>
+
+    <div style="display:inline-block; width:10; vertical-align:top;">
+        <h2>Basic C Language Certification</h2>
+        <img src="c.png" height="550" width="750">
+    </div>
+
+<br><br>
+                <div>
+                    <h2 class="section-title">Honors & Awards</h2>
+                    <ul class="award-list">
+                        <li class="award-item">
+                            <span class="award-title">Intermediate Drawing Grade Examination</span><br>
+                            <span class="award-meta">Awarded by the Maharashtra State Board of Art Education (2023)</span>
+                        </li>
+                        <li class="award-item">
+                            <span class="award-title">Elementary Drawing Grade Examination</span><br>
+                            <span class="award-meta">Awarded by the Maharashtra State Board of Art Education (2022)</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="contact-container">
+                <h2 class="section-title" style="justify-content: center;">CONTACT</h2>
+                <div class="contact-methods">
+                    <a href="tel:8452976509" class="contact-link"><i class="fas fa-phone-alt"></i> 8452976509</a>
+                    <a href="mailto:shravanighag055@gmail.com" class="contact-link"><i class="far fa-envelope"></i> shravanighag055@gmail.com</a>
+                    <a href="https://www.linkedin.com/in/shravani-ghag-b369a62b4" target="_blank" class="contact-link"><i class="fab fa-linkedin"></i> www.linkedin.com/in/shravani-ghag-b369a62b4</a>
+
+<h4> Address:Room no.17, Second Floor, Gokul Niwas, B.B marg, M.P compound, Tardeo, Mumbai- 400034.</h5>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 SHRAVANI GHAG. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // Navbar Scrolled Effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Toggle Responsive Mobile Menu
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Toggle Light/Dark Theme
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'light') {
+                document.documentElement.removeAttribute('data-theme');
+                icon.className = 'fas fa-moon';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                icon.className = 'fas fa-sun';
+            }
+        });
+
+        // Close Mobile Menu on Nav Item Click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
